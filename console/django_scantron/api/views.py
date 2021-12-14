@@ -4,8 +4,9 @@ import os
 # Third party Python libraries.
 from django.http import Http404, JsonResponse
 from django.utils.timezone import localtime
+from django_filters.rest_framework import DjangoFilterBackend
 import redis
-from rest_framework import mixins, viewsets
+from rest_framework import filters, mixins, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 import rq
@@ -134,6 +135,25 @@ class ScheduledScanViewSet(ListRetrieveUpdateViewSet, DefaultsMixin):
 
     model = ScheduledScan
     serializer_class = ScheduledScanSerializer
+
+    # Filter and search.
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    filter_fields = (
+        "id",
+        "site_name",
+        "start_time",
+        "scan_engine",
+        "start_datetime",
+        "scan_binary",
+        "scan_command",
+        "targets",
+        "excluded_targets",
+        "scan_status",
+        "completed_time",
+        "result_file_base_name",
+        "pooled_scan_result_file_base_name",
+        "scan_binary_process_id",
+    )
 
     def partial_update(self, request, pk=None, **kwargs):
 
