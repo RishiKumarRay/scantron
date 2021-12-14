@@ -130,7 +130,7 @@ class ScanViewSet(DefaultsMixin, viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, IsAdminUser)
 
 
-class ScheduledScanViewSet(ListRetrieveUpdateViewSet, DefaultsMixin):
+class ScheduledScanViewSet(ListRetrieveUpdateViewSet):
     """API CRUD operations for ScheduledScan Model."""
 
     model = ScheduledScan
