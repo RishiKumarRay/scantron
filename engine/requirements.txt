@@ -1,2 +1,0 @@
-# ipython, not required, helpful when needing a Python shell.
-ipython
